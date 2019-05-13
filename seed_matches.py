@@ -9,8 +9,8 @@ def get_seed_matches():
     if res.status_code >= 400 and res.status_code < 500: print("Bad request")
     elif res.status_code >= 500: print("Server error")
     else:
-      filename = 'data/seeded_matches%d.json' %i
-      with open(filename, 'w') as f: f.write(req.text)
+      filename = 'data/seed_match%d.json' %i
+      with open(filename, 'w') as f: f.write(res.text)
 
   print("All JSON downloaded successfully!")
 

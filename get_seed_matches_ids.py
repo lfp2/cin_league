@@ -7,14 +7,10 @@ def get_json(file):
   with open(file) as f: return json.load(f)
 
 def get_matches_ids():
-  ids = []
   for file in files:
     hash = get_json(file)
-
-    for match in hash['matches']:
-      ids.append(match['gameId'])
-
-  with open('data/ids.json', 'w') as f: f.write(str(ids))
+    ids = map(lambda m: m['gameId'], hash['matches'])
+  with open('data/seed_ids.json', 'w') as f: f.write(str(ids))
 
   print("ID's collected successfully")
 
