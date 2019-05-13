@@ -91,6 +91,3 @@ def req(id_game, key):
                 'first_blood': first_blood,
                 'dragons_team_1': dragons_team_1,
                 'dragons_team_2': dragons_team_2}
-
-result = req('1649289144','RGAPI-8aeaca9b-6e1a-4bbc-b64b-99215ab11533')
-print(result)
