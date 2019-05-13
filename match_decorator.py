@@ -7,7 +7,7 @@ SERVER = "br1"
 def req(game_id, key):
   attributes = {
     "server": SERVER,
-    "first_blood": 1,
+    "first_blood": -1,
     "yellow_trinket_team_1": 0,
     "yellow_trinket_team_2": 0,
     "control_ward_team_1": 0,
