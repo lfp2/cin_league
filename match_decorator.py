@@ -4,6 +4,34 @@ import requests
 API_KEY = 'RGAPI-a5801ac5-8327-4d95-98f3-4d2906885eca'
 SERVER = "br1"
 
+def req_match(game_id, key):
+  attributes = {
+    "server": SERVER,
+  }
+  url = 'https://%s.api.riotgames.com/lol/match/v4/matches/%s?api_key=%s' %(SERVER, game_id, key)
+  res = requests.get(url)
+  if res.status_code != 200:
+    print('REQUEST ERROR: %d' %res.status_code)
+    print(res.json()['status']['message'])
+    return None
+  else:
+    attributes['match_id'] = game_id
+    json_response = res.json()
+    attributes['game_mode'] = json_response['gameMode']
+    attributes['game_type'] = json_response['gameType']
+    attributes['participants'] = json_response['participants']
+    attributes['participantIdentities'] = json_response['participantIdentities']
+    if len(json_response['teams']) == 2:
+      attributes['bans_team_1'] = json_response['teams'][0]['bans']
+      attributes['bans_team_2'] = json_response['teams'][1]['bans']
+      if json_response['teams'][0]['win'] == "Win":
+        attributes['winning_team'] = 1
+      else:
+        attributes['winning_team'] = 2
+
+    return attributes
+      
+
 def req(game_id, key):
   attributes = {
     "server": SERVER,
